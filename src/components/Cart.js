@@ -4,9 +4,8 @@ import { useCart } from '../CartContext';
 import './Cart.css';
 
 function Cart() {
-  const { cartItems: items, removeFromCart: remove, updateQuantity } = useCart();
+  const { cartItems: items, removeFromCart: remove } = useCart();
 
-  // If your context uses different function names, adjust accordingly (e.g., increase/decrease)
   const total = items.reduce((sum, item) => sum + item.price * (item.qty || item.quantity || 1), 0);
 
   return (
@@ -28,7 +27,7 @@ function Cart() {
             items.map(item => (
               <div className="cart-item" key={item.id}>
                 <div className="cart-item-image">
-                  <span>{item.emoji || '📦'}</span>
+                  <img src={item.image} alt={item.name} style={{width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px'}} />
                 </div>
                 <div className="cart-item-info">
                   <p className="cart-item-category">{item.category}</p>
@@ -36,7 +35,7 @@ function Cart() {
                   <p className="cart-item-price">${item.price.toFixed(2)}</p>
                 </div>
                 <div className="cart-item-qty">
-                  <span>Qty: {item.qty || item.quantity}</span>
+                  <span>Qty: {item.qty || item.quantity || 1}</span>
                 </div>
                 <div className="cart-item-total">
                   ${(item.price * (item.qty || item.quantity || 1)).toFixed(2)}
@@ -69,4 +68,5 @@ function Cart() {
   );
 }
 
+export data Cart; // wait, make sure it says export default Cart;
 export default Cart;
