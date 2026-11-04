@@ -1,24 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useCart } from '../CartContext';
 import './Cart.css';
 
-const initialItems = [];
-
 function Cart() {
-  const [items, setItems] = useState(initialItems);
+  const { cartItems: items, removeFromCart: remove, updateQuantity } = useCart();
 
-  const increase = (id) => {
-    setItems(items.map(item => item.id === id ? { ...item, qty: item.qty + 1 } : item));
-  };
-
-  const decrease = (id) => {
-    setItems(items.map(item => item.id === id && item.qty > 1 ? { ...item, qty: item.qty - 1 } : item));
-  };
-
-  const remove = (id) => {
-    setItems(items.filter(item => item.id !== id));
-  };
-
-  const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+  // If your context uses different function names, adjust accordingly (e.g., increase/decrease)
+  const total = items.reduce((sum, item) => sum + item.price * (item.qty || item.quantity || 1), 0);
 
   return (
     <section className="cart">
@@ -33,13 +22,13 @@ function Cart() {
             <div className="cart-empty">
               <span>🛒</span>
               <h3>Your cart is empty</h3>
-              <a href="/shop">Continue Shopping</a>
+              <Link to="/shop">Continue Shopping</Link>
             </div>
           ) : (
             items.map(item => (
               <div className="cart-item" key={item.id}>
                 <div className="cart-item-image">
-                  <span>{item.emoji}</span>
+                  <span>{item.emoji || '📦'}</span>
                 </div>
                 <div className="cart-item-info">
                   <p className="cart-item-category">{item.category}</p>
@@ -47,12 +36,10 @@ function Cart() {
                   <p className="cart-item-price">${item.price.toFixed(2)}</p>
                 </div>
                 <div className="cart-item-qty">
-                  <button onClick={() => decrease(item.id)}>−</button>
-                  <span>{item.qty}</span>
-                  <button onClick={() => increase(item.id)}>+</button>
+                  <span>Qty: {item.qty || item.quantity}</span>
                 </div>
-                <div className="ask-item-total">
-                  ${(item.price * item.qty).toFixed(2)}
+                <div className="cart-item-total">
+                  ${(item.price * (item.qty || item.quantity || 1)).toFixed(2)}
                 </div>
                 <button className="remove-btn" onClick={() => remove(item.id)}>✕</button>
               </div>
@@ -74,8 +61,8 @@ function Cart() {
             <span>Total</span>
             <span>${total.toFixed(2)}</span>
           </div>
-          <a href="/checkout" className="checkout-btn" style={{textDecoration:'none', display:'block', textAlign:'center'}}>Proceed to Checkout</a>
-          <a href="/shop" className="continue-link">Continue Shopping</a>
+          <Link to="/checkout" className="checkout-btn" style={{textDecoration:'none', display:'block', textAlign:'center'}}>Proceed to Checkout</Link>
+          <Link to="/shop" className="continue-link">Continue Shopping</Link>
         </div>
       </div>
     </section>
