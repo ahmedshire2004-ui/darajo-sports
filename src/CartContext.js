@@ -10,17 +10,21 @@ export function CartProvider({ children }) {
       const exists = prev.find(item => item.id === product.id);
       if (exists) {
         return prev.map(item =>
-          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
+          item.id === product.id ? { ...item, qty: (item.qty || 1) + 1 } : item
         );
       }
       return [...prev, { ...product, qty: 1 }];
     });
   };
 
-  const cartCount = cartItems.reduce((sum, item) => sum + item.qty, 0);
+  const removeFromCart = (id) => {
+    setCartItems(prev => prev.filter(item => item.id !== id));
+  };
+
+  const cartCount = cartItems.reduce((sum, item) => sum + (item.qty || 1), 0);
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, cartCount }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, cartCount }}>
       {children}
     </CartContext.Provider>
   );
