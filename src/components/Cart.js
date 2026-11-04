@@ -68,5 +68,4 @@ function Cart() {
   );
 }
 
-export data Cart; // wait, make sure it says export default Cart;
 export default Cart;
