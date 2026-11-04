@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import Banner from './components/Banner';
 import Categories from './components/Categories';
 import Products from './components/Products';
+import ProductDetails from './components/ProductDetails';
 import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 import Shop from './components/Shop';
@@ -40,6 +41,7 @@ function App() {
               </>
             } />
             <Route path="/shop" element={<><Navbar /><Shop /><Footer /><ChatBot /></>} />
+            <Route path="/product/:id" element={<><Navbar /><ProductDetails /><Footer /><ChatBot /></>} />
             <Route path="/about" element={<><Navbar /><About /><Footer /><ChatBot /></>} />
             <Route path="/contact" element={<><Navbar /><Contact /><Footer /><ChatBot /></>} />
             <Route path="/cart" element={<><Navbar /><Cart /><Footer /><ChatBot /></>} />

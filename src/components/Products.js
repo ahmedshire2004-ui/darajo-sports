@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useCart } from '../CartContext';
 import './Products.css';
 
@@ -39,13 +40,17 @@ function Products() {
             viewport={{ once: true }}
             whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
           >
-            <div className="product-image">
-              <img src={product.image} alt={product.name} />
-            </div>
-            <div className="product-info">
-              <p className="product-category">{product.category}</p>
-              <h3 className="product-name">{product.name}</h3>
-              <p className="product-price">${product.price.toFixed(2)}</p>
+            <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="product-image">
+                <img src={product.image} alt={product.name} />
+              </div>
+              <div className="product-info">
+                <p className="product-category">{product.category}</p>
+                <h3 className="product-name">{product.name}</h3>
+                <p className="product-price">${product.price.toFixed(2)}</p>
+              </div>
+            </Link>
+            <div style={{ padding: '0 1rem 1rem' }}>
               <button className="add-to-cart" onClick={() => addToCart(product)}>Add to Cart</button>
             </div>
           </motion.div>

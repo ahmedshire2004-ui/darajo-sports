@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import './Cart.css';
 
-const initialItems = [
-  { id: 1, name: 'Pro Football Jersey', price: 29.99, category: 'Jerseys', emoji: '👕', qty: 1 },
-  { id: 2, name: 'Running Shorts', price: 19.99, category: 'Shorts', emoji: '🩳', qty: 1 },
-  { id: 3, name: 'Sport Sneakers', price: 89.99, category: 'Shoes', emoji: '👟', qty: 1 },
-];
+const initialItems = [];
 
 function Cart() {
   const [items, setItems] = useState(initialItems);
@@ -55,7 +51,7 @@ function Cart() {
                   <span>{item.qty}</span>
                   <button onClick={() => increase(item.id)}>+</button>
                 </div>
-                <div className="cart-item-total">
+                <div className="ask-item-total">
                   ${(item.price * item.qty).toFixed(2)}
                 </div>
                 <button className="remove-btn" onClick={() => remove(item.id)}>✕</button>
