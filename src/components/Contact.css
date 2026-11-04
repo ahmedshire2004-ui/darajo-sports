@@ -1,0 +1,144 @@
+.contact {
+  background-color: #fff;
+}
+
+.contact-hero {
+  background-color: #111;
+  color: #fff;
+  text-align: center;
+  padding: 80px 40px;
+}
+
+.contact-hero h1 {
+  font-size: 52px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+
+.contact-hero h1 span {
+  color: #2ecc40;
+}
+
+.contact-hero p {
+  font-size: 18px;
+  color: #aaa;
+}
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding: 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contact-info h2,
+.contact-form h2 {
+  font-size: 28px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 32px;
+  color: #000;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.info-item span {
+  font-size: 28px;
+}
+
+.info-item h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.info-item p {
+  font-size: 15px;
+  color: #666;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #eee;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.3s;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #000;
+}
+
+.send-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.send-btn:hover {
+  background-color: #2ecc40;
+}
+
+.success-msg {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.success-msg span {
+  font-size: 60px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.success-msg h3 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.success-msg p {
+  color: #666;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+    padding: 40px;
+  }
+
+  .contact-hero h1 {
+    font-size: 32px;
+  }
+}

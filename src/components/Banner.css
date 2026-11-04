@@ -1,0 +1,109 @@
+.banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #111;
+  padding: 60px 80px;
+  gap: 60px;
+  align-items: center;
+}
+
+.banner-tag {
+  display: inline-block;
+  background-color: #2ecc40;
+  color: #000;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 6px 16px;
+  margin-bottom: 20px;
+}
+
+.banner-left h2 {
+  font-size: 42px;
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.banner-left h2 span {
+  color: #2ecc40;
+}
+
+.banner-left p {
+  color: #aaa;
+  font-size: 16px;
+  margin-bottom: 32px;
+}
+
+.banner-left strong {
+  color: #fff;
+  background-color: #222;
+  padding: 4px 10px;
+  letter-spacing: 2px;
+}
+
+.banner-btn {
+  display: inline-block;
+  padding: 16px 48px;
+  background-color: #2ecc40;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s;
+}
+
+.banner-btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.banner-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.banner-card {
+  background-color: #1a1a1a;
+  padding: 24px;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.banner-card:hover {
+  background-color: #222;
+}
+
+.banner-card span {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.banner-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.banner-card p {
+  font-size: 13px;
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .banner {
+    grid-template-columns: 1fr;
+    padding: 40px 20px;
+  }
+}
