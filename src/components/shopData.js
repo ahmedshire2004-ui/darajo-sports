@@ -1,0 +1,14 @@
+export const allProducts = [
+  { id: 1, name: 'Pro Football Jersey', price: 29.99, category: 'Jerseys', description: 'Breathable, lightweight match-day jersey with moisture-wicking fabric.', image: 'https://images.unsplash.com/photo-1562155955-1cb2d73488d7?w=400&fit=crop' },
+  { id: 2, name: 'Running Shorts', price: 19.99, category: 'Shorts', description: 'Quick-dry running shorts with a comfortable elastic waistband.', image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?w=400&fit=crop' },
+  { id: 3, name: 'Training Tracksuit', price: 59.99, category: 'Tracksuits', description: 'Warm, flexible tracksuit for training sessions and everyday wear.', image: 'https://images.unsplash.com/photo-1518459031867-a89b944bffe4?w=400&fit=crop' },
+  { id: 4, name: 'Sport Sneakers', price: 89.99, category: 'Shoes', description: 'Cushioned sneakers built for comfort, grip and long-distance performance.', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&fit=crop' },
+  { id: 5, name: 'Boxing Gloves', price: 34.99, category: 'Equipment', description: 'Padded boxing gloves with a secure wrist strap for training and sparring.', image: 'https://images.unsplash.com/photo-1583473848882-f9a5bc7fd2ee?w=400&fit=crop' },
+  { id: 6, name: 'Sport Hoodie', price: 44.99, category: 'Hoodies', description: 'Soft fleece hoodie to keep you warm before and after your workout.', image: 'https://images.unsplash.com/photo-1509942774463-acf339cf87d5?w=400&fit=crop' },
+  { id: 7, name: 'Basketball Jersey', price: 32.99, category: 'Jerseys', description: 'Sleeveless mesh jersey designed for freedom of movement on court.', image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400&fit=crop' },
+  { id: 8, name: 'Gym Shorts', price: 22.99, category: 'Shorts', description: 'Durable gym shorts with deep pockets and a relaxed fit.', image: 'https://images.unsplash.com/photo-1571945153237-4929e783af4a?w=400&fit=crop' },
+  { id: 9, name: 'Football Boots', price: 79.99, category: 'Shoes', description: 'Studded football boots with strong traction and precise ball control.', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&fit=crop' },
+  { id: 10, name: 'Swim Goggles', price: 14.99, category: 'Equipment', description: 'Anti-fog swim goggles with an adjustable, leak-proof seal.', image: 'https://images.unsplash.com/photo-1583473848882-f9a5bc7fd2ee?w=400&fit=crop' },
+  { id: 11, name: 'Zip Tracksuit', price: 64.99, category: 'Tracksuits', description: 'Full-zip tracksuit with a modern cut and stretch fabric.', image: 'https://images.unsplash.com/photo-1518459031867-a89b944bffe4?w=400&fit=crop' },
+  { id: 12, name: 'Pullover Hoodie', price: 49.99, category: 'Hoodies', description: 'Classic pullover hoodie with a kangaroo pocket and adjustable hood.', image: 'https://images.unsplash.com/photo-1509942774463-acf339cf87d5?w=400&fit=crop' },
+];

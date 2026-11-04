@@ -1,22 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../CartContext';
+import { allProducts } from './shopData';
 import './Shop.css';
-
-const allProducts = [
-  { id: 1, name: 'Pro Football Jersey', price: 29.99, category: 'Jerseys', image: 'https://images.unsplash.com/photo-1562155955-1cb2d73488d7?w=400&fit=crop' },
-  { id: 2, name: 'Running Shorts', price: 19.99, category: 'Shorts', image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?w=400&fit=crop' },
-  { id: 3, name: 'Training Tracksuit', price: 59.99, category: 'Tracksuits', image: 'https://images.unsplash.com/photo-1518459031867-a89b944bffe4?w=400&fit=crop' },
-  { id: 4, name: 'Sport Sneakers', price: 89.99, category: 'Shoes', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&fit=crop' },
-  { id: 5, name: 'Boxing Gloves', price: 34.99, category: 'Equipment', image: 'https://images.unsplash.com/photo-1583473848882-f9a5bc7fd2ee?w=400&fit=crop' },
-  { id: 6, name: 'Sport Hoodie', price: 44.99, category: 'Hoodies', image: 'https://images.unsplash.com/photo-1509942774463-acf339cf87d5?w=400&fit=crop' },
-  { id: 7, name: 'Basketball Jersey', price: 32.99, category: 'Jerseys', image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400&fit=crop' },
-  { id: 8, name: 'Gym Shorts', price: 22.99, category: 'Shorts', image: 'https://images.unsplash.com/photo-1571945153237-4929e783af4a?w=400&fit=crop' },
-  { id: 9, name: 'Football Boots', price: 79.99, category: 'Shoes', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&fit=crop' },
-  { id: 10, name: 'Swim Goggles', price: 14.99, category: 'Equipment', image: 'https://images.unsplash.com/photo-1583473848882-f9a5bc7fd2ee?w=400&fit=crop' },
-  { id: 11, name: 'Zip Tracksuit', price: 64.99, category: 'Tracksuits', image: 'https://images.unsplash.com/photo-1518459031867-a89b944bffe4?w=400&fit=crop' },
-  { id: 12, name: 'Pullover Hoodie', price: 49.99, category: 'Hoodies', image: 'https://images.unsplash.com/photo-1509942774463-acf339cf87d5?w=400&fit=crop' },
-];
 
 const categories = ['All', 'Jerseys', 'Shorts', 'Tracksuits', 'Shoes', 'Equipment', 'Hoodies'];
 

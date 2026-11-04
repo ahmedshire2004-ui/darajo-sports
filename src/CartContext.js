@@ -1,9 +1,27 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
+const STORAGE_KEY = 'darajo_cart';
+
+function loadCart() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch (e) {
+    return [];
+  }
+}
 
 export function CartProvider({ children }) {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(loadCart); // starts empty
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cartItems));
+    } catch (e) {
+      /* ignore storage errors */
+    }
+  }, [cartItems]);
 
   const addToCart = (product) => {
     setCartItems(prev => {
@@ -21,10 +39,20 @@ export function CartProvider({ children }) {
     setCartItems(prev => prev.filter(item => item.id !== id));
   };
 
+  const updateQty = (id, qty) => {
+    setCartItems(prev =>
+      prev.map(item => (item.id === id ? { ...item, qty: Math.max(1, qty) } : item))
+    );
+  };
+
+  const clearCart = () => setCartItems([]);
+
   const cartCount = cartItems.reduce((sum, item) => sum + (item.qty || 1), 0);
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, cartCount }}>
+    <CartContext.Provider
+      value={{ cartItems, addToCart, removeFromCart, updateQty, clearCart, cartCount }}
+    >
       {children}
     </CartContext.Provider>
   );
