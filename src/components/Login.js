@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
+const API_URL = (process.env.REACT_APP_API_URL || 'http://localhost:5000').replace(/\/$/, '');
+
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [form, setForm] = useState({ name: '', email: '', password: '' });
@@ -18,8 +20,8 @@ function Login() {
     setError('');
     try {
       const url = isLogin
-        ? 'http://localhost:5000/api/auth/login'
-        : 'http://localhost:5000/api/auth/register';
+        ? `${API_URL}/api/auth/login`
+        : `${API_URL}/api/auth/register`;
 
       const body = isLogin
         ? { email: form.email, password: form.password }
@@ -34,7 +36,7 @@ function Login() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.message);
+        setError(data.message || 'Something went wrong. Try again.');
         setLoading(false);
         return;
       }
@@ -44,7 +46,7 @@ function Login() {
       setLoading(false);
       navigate('/home');
     } catch (err) {
-      setError('Something went wrong. Try again.');
+      setError('Cannot reach the server. It may be waking up, wait a minute and try again.');
       setLoading(false);
     }
   };
