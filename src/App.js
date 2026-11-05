@@ -13,7 +13,6 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
-import Login from './components/Login';
 import Admin from './components/Admin';
 import ChatBot from './components/ChatBot';
 import Welcome from './components/Welcome';
@@ -27,7 +26,6 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<Welcome />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/home" element={
               <>
                 <Navbar />
