@@ -1,54 +1,24 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Banner from './components/Banner';
-import Categories from './components/Categories';
-import Products from './components/Products';
-import ProductDetails from './components/ProductDetails';
-import Testimonials from './components/Testimonials';
-import Footer from './components/Footer';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Welcome from './components/Welcome';
+import Home from './components/Home';
 import Shop from './components/Shop';
+import Cart from './components/Cart';
 import About from './components/About';
 import Contact from './components/Contact';
-import Cart from './components/Cart';
-import Checkout from './components/Checkout';
-import Admin from './components/Admin';
-import ChatBot from './components/ChatBot';
-import Welcome from './components/Welcome';
-import { CartProvider } from './CartContext';
-import './App.css';
 
 function App() {
   return (
-    <CartProvider>
-      <Router>
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/home" element={
-              <>
-                <Navbar />
-                <Hero />
-                <Banner />
-                <Categories />
-                <Products />
-                <Testimonials />
-                <Footer />
-                <ChatBot />
-              </>
-            } />
-            <Route path="/shop" element={<><Navbar /><Shop /><Footer /><ChatBot /></>} />
-            <Route path="/product/:id" element={<><Navbar /><ProductDetails /><Footer /><ChatBot /></>} />
-            <Route path="/about" element={<><Navbar /><About /><Footer /><ChatBot /></>} />
-            <Route path="/contact" element={<><Navbar /><Contact /><Footer /><ChatBot /></>} />
-            <Route path="/cart" element={<><Navbar /><Cart /><Footer /><ChatBot /></>} />
-            <Route path="/checkout" element={<><Navbar /><Checkout /><Footer /><ChatBot /></>} />
-            <Route path="/admin" element={<><Navbar /><Admin /><Footer /></>} />
-          </Routes>
-        </div>
-      </Router>
-    </CartProvider>
+    <Routes>
+      <Route path="/" element={<Welcome />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/shop" element={<Shop />} />
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+
+      {/* Redirect any old or invalid path (like /login) back to home */}
+      <Route path="*" element={<Navigate to="/home" replace />} />
+    </Routes>
   );
 }
 
