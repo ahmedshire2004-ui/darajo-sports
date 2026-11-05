@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useCart } from '../CartContext';
 import './Checkout.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 function Checkout() {
+  const { cartItems, clearCart } = useCart();
   const [payment, setPayment] = useState('evc');
   const [form, setForm] = useState({ name: '', address: '', phone: '' });
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const getQty = (item) => item.qty || 1;
+  const total = cartItems.reduce((sum, item) => sum + item.price * getQty(item), 0);
+  const totalFixed = Number(total.toFixed(2));
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handlePay = async () => {
+    if (cartItems.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
     if (!form.name || !form.address || !form.phone) {
       alert('Please fill all fields!');
       return;
@@ -19,33 +32,40 @@ function Checkout() {
     setLoading(true);
     try {
       const endpoint = payment === 'evc'
-        ? 'http://localhost:5000/api/payment/evc'
-        : 'http://localhost:5000/api/payment/waafi';
+        ? `${API_URL}/api/payment/evc`
+        : `${API_URL}/api/payment/waafi`;
 
       const paymentRes = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           phone: form.phone,
-          amount: 139.97,
+          amount: totalFixed,
           orderID: 'ORD' + Date.now()
         })
       });
 
-      const paymentData = await paymentRes.json(); // ✅ Always parse JSON first
+      const paymentData = await paymentRes.json();
 
       if (paymentData.success) {
-        await fetch('http://localhost:5000/api/orders', {
+        await fetch(`${API_URL}/api/orders`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            items: [],
-            totalPrice: 139.97,
+            items: cartItems.map(item => ({
+              productId: item.id,
+              name: item.name,
+              price: item.price,
+              qty: getQty(item),
+              image: item.image,
+            })),
+            totalPrice: totalFixed,
             paymentMethod: payment,
             phone: form.phone,
             address: form.address,
           })
         });
+        clearCart();
         setLoading(false);
         setDone(true);
       } else {
@@ -73,6 +93,13 @@ function Checkout() {
           <p>Thank you <strong>{form.name}</strong>! Your payment via <strong>{payment === 'evc' ? 'EVC Plus' : 'Waafi'}</strong> is being processed.</p>
           <p className="success-phone">Confirmation will be sent to <strong>+252{form.phone}</strong></p>
           <a href="/" className="back-home">Back to Home</a>
+        </div>
+      ) : cartItems.length === 0 ? (
+        <div className="checkout-success">
+          <span>🛒</span>
+          <h2>Your cart is empty</h2>
+          <p>Add some products before you check out.</p>
+          <Link to="/shop" className="back-home">Go to Shop</Link>
         </div>
       ) : (
         <div className="checkout-container">
@@ -151,22 +178,16 @@ function Checkout() {
 
           <div className="checkout-summary">
             <h2>Order Summary</h2>
-            <div className="summary-item">
-              <span>👕 Pro Football Jersey x1</span>
-              <span>$29.99</span>
-            </div>
-            <div className="summary-item">
-              <span>🩳 Running Shorts x1</span>
-              <span>$19.99</span>
-            </div>
-            <div className="summary-item">
-              <span>👟 Sport Sneakers x1</span>
-              <span>$89.99</span>
-            </div>
+            {cartItems.map(item => (
+              <div className="summary-item" key={item.id}>
+                <span>{item.name} x{getQty(item)}</span>
+                <span>${(item.price * getQty(item)).toFixed(2)}</span>
+              </div>
+            ))}
             <div className="summary-divider" />
             <div className="summary-row">
               <span>Subtotal</span>
-              <span>$139.97</span>
+              <span>${total.toFixed(2)}</span>
             </div>
             <div className="summary-row">
               <span>Shipping</span>
@@ -174,7 +195,7 @@ function Checkout() {
             </div>
             <div className="summary-row total">
               <span>Total</span>
-              <span>$139.97</span>
+              <span>${total.toFixed(2)}</span>
             </div>
             <button className="pay-btn" onClick={handlePay} disabled={loading}>
               {loading
